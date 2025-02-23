@@ -36,3 +36,9 @@ bodyElement.innerHTML = orderedList(["Hello", 300, "Java", "Nodejs", 100]);
 
 const sortedArray = array.sort(compNumStr);
 console.log(sortedArray);
+
+const array2 = ["Banana", 200, "Apple", -50, "Orange", 350];
+console.log("array2:", array2.sort(compNumStr));
+
+const array3 = [12, 40, 23, 44, 1];
+console.log("array3:", array3.sort(compNumStr));
