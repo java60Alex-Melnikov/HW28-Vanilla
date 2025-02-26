@@ -13,3 +13,8 @@ function myReduce(array, callback, initialValue) {
     return res;
   }
 
+  array = [6, 4, 2, 8, 10]
+  array1 = ["banana", "apple", "melon", "grape"]
+  
+    console.log("Minimum and maximum value =", minMax(array));  
+    console.log("Minimum and maximum value =", minMax(array1)); 
