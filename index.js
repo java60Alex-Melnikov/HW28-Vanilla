@@ -9,7 +9,7 @@ function myReduce(array, callback, initialValue) {
   
   function minMax(array) {
     const res = myReduce(array, (acc, curr) => [acc[0] > curr ? curr : acc[0] , acc[1] < curr ? curr : acc[1]],
-    [arr[0], arr[0]]);
+    [array[0], array[0]]);
     return res;
   }
 
