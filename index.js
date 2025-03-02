@@ -34,4 +34,21 @@ function testframework(scripts, expectedResults) {
   const ol = document.createElement('ol');
   let passedCount = 0;
   let failedCount = 0;
+  
+  for (let i = 0; i < scripts.length; i++) {
+    const testResult = test({ script: scripts[i], expected: expectedResults[i] });
+    const li = document.createElement('li');
+    li.textContent = `Script: ${testResult.script} | Expected: ${testResult.expectedJSON} | Actual: ${testResult.actualJSON} | Result: ${testResult.result}`;
+    
+    if (testResult.result === 'passed') {
+      li.style.color = 'green';
+      passedCount++;
+    } else {
+      li.style.color = 'red';
+      failedCount++;
+    }
+    
+    ol.appendChild(li);
+  }
+
 }
