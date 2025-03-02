@@ -51,4 +51,9 @@ function testframework(scripts, expectedResults) {
     ol.appendChild(li);
   }
 
+  const summary = document.createElement('p');
+  summary.innerHTML = `<strong>Summary:</strong> <span style="color: green;">${passedCount} passed</span>, <span style="color: red;">${failedCount} failed</span>`;
+  
+  bodyElem.appendChild(ol);
+  bodyElem.appendChild(summary);
 }
