@@ -57,3 +57,12 @@ function testframework(scripts, expectedResults) {
   bodyElem.appendChild(ol);
   bodyElem.appendChild(summary);
 }
+const scripts = [
+  'minMax(["hello", "kuku", "abc"])',
+  'minMax([1, 2, 3])'
+];
+const expectedResults = [
+  ["abc", "kuku"],
+  [1, 3]
+];
+testframework(scripts, expectedResults);
