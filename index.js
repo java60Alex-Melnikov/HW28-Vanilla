@@ -1,22 +1,37 @@
 function myReduce(array, callback, initialValue) {
-    let accumulator = initialValue == undefined ? array[0] : initialValue
-    const startIndex = initialValue == undefined ? 1 : 0
-    for (let i = startIndex; i < array.length; i++) {
-      accumulator = callback(accumulator, array[i], i, array);
-    }
-    return accumulator;
+  let acc = initialValue == undefined ? array[0] : initialValue;
+  const index = initialValue == undefined  ? 1 : 0;
+  for (let i = index; i < array.length; i++) {
+    acc = callback(acc, array[i], i, array);
   }
-  
-  function minMax(array) {
-    const res = myReduce(array, (acc, curr) => [
-    acc[0] > curr ? curr : acc[0], 
-    acc[1] < curr ? curr : acc[1]],
-    [array[0], array[0]]); 
-    return res;
-  }
+  return acc;
+}
+function minMax(arr){
+  const res = myReduce(arr, (acc, curr) => [acc[0] > curr ? curr : acc[0] , acc[1] < curr ? curr : acc[1]],
+   [arr[0], arr[0]]);
+  return res;
+}
 
-  array = [6, 4, 2, 8, 10]
-  array1 = ["banana", "apple", "melon", "grape"]
-  
-    console.log("Minimum and maximum value =", minMax(array));  
-    console.log("Minimum and maximum value =", minMax(array1)); 
+function test(testObj) {
+  const expectedJSON = JSON.stringify(testObj.expected);
+  let evalRes;
+  try {
+      evalRes = eval(testObj.script);
+     
+  } catch (error) {
+      evalRes = error;
+  }
+  const actualJSON = JSON.stringify(evalRes);
+  const result = expectedJSON === actualJSON ? 'passed' : 'failed';
+  const testResult = createTestResult(testObj.script, expectedJSON, actualJSON, result);
+  return testResult;
+}
+function createTestResult(script, expectedJSON, actualJSON, result) {
+  return {script, expectedJSON, actualJSON, result};
+}
+function testframework(scripts, expectedResults) {
+  const bodyElem = document.querySelector('body');
+  const ol = document.createElement('ol');
+  let passedCount = 0;
+  let failedCount = 0;
+}
