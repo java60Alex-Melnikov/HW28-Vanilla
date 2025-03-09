@@ -1,7 +1,6 @@
-import { testframework } from "./testframework.js";
-   testframework('isAnagram testing','const string = "hello"',
-    ['isAnagram(string, "olleh")', 'isAnagram(string, "lehol")',
-      'isAnagram(string, "ollle")', 'isAnagram(string, "hell")',
-      'isAnagram(string, "oelhl")'
-    ], [true, true, false, false, true]
-   )
+const arr = [1, 2, 3];
+let first = 1;
+let second = 2;
+[first, second] = [second, first];
+console.log(`second = ${second}`) //should be printed out 1
+console.log(`first = ${first}`) //should be printed out 2
