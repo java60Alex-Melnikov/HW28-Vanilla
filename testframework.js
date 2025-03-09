@@ -1,4 +1,5 @@
 import { mergeObjects } from "./mergeObjects.js";
+import { isAnagram } from "./anagram.js";
 function test(commonScript, testObj) {
   const expectedJSON = JSON.stringify(testObj.expected);
   let evalRes;

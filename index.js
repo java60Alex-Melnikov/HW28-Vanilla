@@ -6,6 +6,12 @@ testframework('mergeObjects testing', 'const obj1={x:2, y:3}; const obj2={z:1, i
     {x:10, y:30}
   ]
 )
+  testframework('isAnagram testing','const string = "hello"',
+   ['isAnagram(string, "olleh")', 'isAnagram(string, "lehol")',
+     'isAnagram(string, "ollle")', 'isAnagram(string, "hell")',
+     'isAnagram(string, "oelhl")'
+   ], [true, true, false, false, true]
+  )
 const arr = [1, 2, 3];
 let first = 1;
 let second = 2;
