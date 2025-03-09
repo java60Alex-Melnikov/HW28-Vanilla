@@ -1,7 +1,16 @@
 export function mergeObjects(firstObj, secondObj, isFirstPref) {
-    //TODO
-    //returns result object as merging of firstObj and secondObj
-    //if there is conflict of keys the parameter isFirstPref defines how to resove a conflict
-    //if isFirstPref is true, then result object should contain value of the conflicted key from the first object
-    //otherwise - from the second one
-}
+    let result = {};
+
+    for (let key in firstObj) {
+      if (firstObj.hasOwnProperty(key)) {
+        result[key] = firstObj[key];
+      }
+    }
+  
+    for (let key in secondObj) {
+      if (secondObj.hasOwnProperty(key)) {
+        result[key] = key in result && isFirstPref ? result[key] : secondObj[key];
+      }
+    }
+    return result;
+  }
