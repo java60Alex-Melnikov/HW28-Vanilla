@@ -1,6 +1,13 @@
-import { mergeObjects } from "./mergeObjects.js";
-import { isAnagram } from "./anagram.js";
+import Employee from "./employee.js";
+import WageEmployee from "./WageEmployee.js";
+import Manager from "./Manager.js";
+import Company from "./Company.js";
 function test(commonScript, testObj) {
+  //testObj structure {script: <string containg script text>, expected: <any type>}
+  //returns resultObj with structure {script: <string containg script text>,
+  //  expectedJSON: <JSON string containing expected result>,
+  //  actualJSON: <JSON string containing actual result>, result: <string containing either 'passed'
+  //  or 'failed'}
   const expectedJSON = JSON.stringify(testObj.expected);
   let evalRes;
   try {
@@ -22,6 +29,12 @@ function createTestResult(script, expectedJSON, actualJSON, result) {
   return { script, expectedJSON, actualJSON, result };
 }
 export function testframework(testName,commonScript, scripts, expectedResults) {
+  //input
+  //scripts - array of tested scripts
+  //expectedResults - array of appropriate results
+  //scrpits[i] and expectedResults[i] should be consistent
+  /**************************************************************** */
+  //output
   const bodyElem = document.querySelector("body");
   const resultObjects = getResultObjects(commonScript,scripts, expectedResults);
   const summary = getSummaryObject(resultObjects);
@@ -29,7 +42,7 @@ export function testframework(testName,commonScript, scripts, expectedResults) {
   const summaryLine = getSummaryLine(summary);
   const commonScriptLines = getCommonScriptLines(commonScript);
   const header = getHeader(testName);
-  bodyElem.innerHTML += `${header}${commonScriptLines}${resultItemsList}${summaryLine}`;
+  bodyElem.innerHTML = `${header}${commonScriptLines}${resultItemsList}${summaryLine}`;
 }
 function getHeader(testName){
   const res = `<header class="logo">${testName}</header>`
