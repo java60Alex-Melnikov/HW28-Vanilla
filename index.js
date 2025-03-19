@@ -7,7 +7,8 @@ function getUserPassword(probCorrectPass) {
 }
 function login(password) {
   return new Promise((resolve, reject) => setTimeout(() => {
-    (password === 'correct') ? resolve('Login successful') : reject('Invalid password')}, 2000))}
+    (password === 'correct') ? resolve('Login successful') : reject('Invalid password')}, 2000))
+  }
 
     function getUserData(username) {
   const users = {
@@ -17,10 +18,22 @@ function login(password) {
   return new Promise((resolve, reject) => {
     setTimeout (() => {
       (users[username]) ? resolve(users[username]) : reject(`User ${username} not found`)}, 1000)})
-    };
+    }
 
     function funStackExample(username) {
-
+      getUserPassword(0.5)
+      .then(password => {
+        return login(password);
+      })
+      .then(() => {
+        return getUserData(username);
+      })
+      .then(userData => {
+        console.log(userData);
+      })
+      .catch(error => {
+        console.log(`error: ${error}`);
+      });
     }
 
 funStackExample('Vasya')
