@@ -22,18 +22,14 @@ function login(password) {
 
     function funStackExample(username) {
       getUserPassword(0.5)
-      .then(password => {
-        return login(password);
-      })
-      .then(() => {
-        return getUserData(username);
-      })
-      .then(userData => {
-        console.log(userData);
-      })
-      .catch(error => {
-        console.log(`error: ${error}`);
-      });
+        .then(password => login(password))
+        .then(() => getUserData(username))
+        .then(userData => {
+          console.log(userData);
+        })
+        .catch(error => {
+          console.log(`error: ${error}`);
+        });
     }
 
 funStackExample('Vasya')
