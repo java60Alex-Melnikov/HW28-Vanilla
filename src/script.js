@@ -6,8 +6,11 @@ const detailedTitle = document.querySelector(".detailedContainer--title");
 let galleryImages;
 const galleryElem = document.getElementById("movie_gallery");
 let currentPage = 1;
+let currentYear = null;
 
 async function drawGalleryItems(year = null, page = 1) {
+  currentYear = year;
+  currentPage = page;
   const yearParam = year ? `&primary_release_year=${year}` : '';
   const pageParam = `&page=${page}`;
   const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US${yearParam}${pageParam}`);
@@ -65,13 +68,13 @@ function addListeners() {
 }
 function nextPage() {
   currentPage++;
-  drawGalleryItems(null, currentPage);
+  drawGalleryItems(currentYear, currentPage);
 }
 
 function prevPage() {
   if (currentPage > 1) {
     currentPage--;
-    drawGalleryItems(null, currentPage);
+    drawGalleryItems(currentYear, currentPage);
   }
 }
 function setDetails(galleryImage) {
