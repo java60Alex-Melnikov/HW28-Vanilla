@@ -1,29 +1,43 @@
+const API_KEY = 'de847a68d299dabfb47014fb950fbf87'; 
+const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
+
 const detailedImage = document.querySelector(".detailedContainer--image");
 const detailedTitle = document.querySelector(".detailedContainer--title");
 let galleryImages;
-const galleryElem = document.getElementById("cats_gallery");
-async function drawGalleryItems() {
-  const response = await fetch("https://api.thecatapi.com/v1/breeds");
+const galleryElem = document.getElementById("movie_gallery");
+let currentPage = 1;
+
+async function drawGalleryItems(year = null, page = 1) {
+  const yearParam = year ? `&primary_release_year=${year}` : '';
+  const pageParam = `&page=${page}`;
+  const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US${yearParam}${pageParam}`);
   const data = await response.json();
-  const itemsData = getItemsData(data); 
+  const itemsData = getItemsData(data.results);
   const items = getItems(itemsData);
   galleryElem.innerHTML = items;
   galleryImages = document.querySelectorAll(".gallery--item_image");
-  addLIsteners();
-
+  addListeners();
+  return data;
 }
 drawGalleryItems();
+const performSearch = () => {
+  const yearInput = document.getElementById('yearInput');
+  const pageInput = document.getElementById('pageInput');
+  const year = yearInput && yearInput.value ? parseInt(yearInput.value) : null;
+  const page = pageInput && pageInput.value ? parseInt(pageInput.value) : 1;
+  drawGalleryItems(year, page);
+};
 function getItemsData(data) {
-   const itemsData = data.map(record =>
-     ({itemImage: getImage(record.reference_image_id),
-       detailedImage: getImage(record.reference_image_id),
-      title:record.name,
-      detailedTitle: record.description}));
-      return itemsData
+  return data.map(record => ({
+    itemImage: getImage(record.poster_path),
+    detailedImage: getImage(record.backdrop_path),
+    title: record.title,
+    detailedTitle: record.overview
+  }));
 }
 function getItems(itemsData) {
   const items = itemsData.map(getItem);
-  return items.join();
+  return items.join('');
 }
 function getItem({itemImage, detailedImage, title, detailedTitle}) {
   return `<li class="gallery--item">
@@ -37,17 +51,29 @@ function getItem({itemImage, detailedImage, title, detailedTitle}) {
           <span class="gallery--item_title">${title} </span>
         </li>`
 }
-function getImage(image_id) {
-  return `https://cdn2.thecatapi.com/images/${image_id}.jpg`
+function getImage(imagePath) {
+  return imagePath 
+    ? `${BASE_IMAGE_URL}${imagePath}` 
+    : 'images/dalmatian-spots-mobile.svg';
 }
-function addLIsteners() {
+function addListeners() {
   for (let i = 0; i < galleryImages.length; i++) {
     galleryImages[i].addEventListener("click", function () {
       setDetails(galleryImages[i]);
     });
   }
 }
+function nextPage() {
+  currentPage++;
+  drawGalleryItems(null, currentPage);
+}
 
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    drawGalleryItems(null, currentPage);
+  }
+}
 function setDetails(galleryImage) {
   let image = galleryImage.getAttribute("data-detailed-image");
   detailedImage.src = "";

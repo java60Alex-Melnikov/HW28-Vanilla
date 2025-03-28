@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,19 +25,16 @@
     
     <div class="search-container">
       <input 
-        type="text" 
-        id="searchInput" 
-        placeholder="Movie name"
-      >
-      <input 
         type="number" 
         id="yearInput" 
-        placeholder="Release Year"
-        min="1800"
+        placeholder="Year"
+        min="1890"
         max="2025"
       >
       <button onclick="performSearch()">Search</button>
       <button onclick="drawGalleryItems()">Popular Movies</button>
+      <button onclick="prevPage()">Previous page</button>
+      <button onclick="nextPage()">Next page</button>
     </div>
 
     <div class="main">
@@ -55,7 +51,7 @@
           </span>
         </div>
       </div>
-      <ul class="gallery" id="cats_gallery">
+      <ul class="gallery" id="movie_gallery">
         
       </ul>
     </div>
