@@ -51,6 +51,17 @@ body {
    
   
   }
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+  .search-container input, 
+  .search-container button {
+    padding: 10px;
+    font-size: 1rem;
+  }
   .animation-down {
     animation: zoomInDown;
     animation-duration: 2s;
