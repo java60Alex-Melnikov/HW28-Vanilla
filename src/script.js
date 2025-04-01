@@ -19,16 +19,17 @@ async function drawGalleryItems(year = null, page = 1) {
   const items = getItems(itemsData);
   galleryElem.innerHTML = items;
   galleryImages = document.querySelectorAll(".gallery--item_image");
+  document.getElementById('currentPageDisplay').textContent = `Page: ${currentPage}`;
   addListeners();
   return data;
 }
 drawGalleryItems();
+
 const performSearch = () => {
   const yearInput = document.getElementById('yearInput');
-  const pageInput = document.getElementById('pageInput');
-  const year = yearInput && yearInput.value ? parseInt(yearInput.value) : null;
-  const page = pageInput && pageInput.value ? parseInt(pageInput.value) : 1;
-  drawGalleryItems(year, page);
+  const year = yearInput?.value ? parseInt(yearInput.value) : null;
+  resetDetailedView()
+  drawGalleryItems(year, 1);
 };
 function getItemsData(data) {
   return data.map(record => ({
@@ -77,6 +78,12 @@ function prevPage() {
     drawGalleryItems(currentYear, currentPage);
   }
 }
+
+function resetDetailedView() {
+  detailedImage.src = 'images/dalmatian-spots-mobile.svg';
+  detailedTitle.innerHTML = 'Popular Movies Gallery<span class="for_ellipsis">...</span>';
+}
+
 function setDetails(galleryImage) {
   let image = galleryImage.getAttribute("data-detailed-image");
   detailedImage.src = "";
