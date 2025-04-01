@@ -79,6 +79,11 @@ function prevPage() {
   }
 }
 
+function backButton() {
+  resetDetailedView()
+  drawGalleryItems();
+}
+
 function resetDetailedView() {
   detailedImage.src = 'images/dalmatian-spots-mobile.svg';
   detailedTitle.innerHTML = 'Popular Movies Gallery<span class="for_ellipsis">...</span>';

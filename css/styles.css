@@ -51,6 +51,13 @@ body {
    
   
   }
+  .back-button,
+  .back-button button{
+    display: flex;
+    justify-content: right;
+    margin-top: -28px;
+    font-size: 4rem;
+  }
   .search-container {
     display: flex;
     justify-content: center;
